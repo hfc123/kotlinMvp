@@ -54,7 +54,11 @@ dependencies {
     implementation('com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar') {
     exclude group: 'com.android.support', module: 'support-v4'
   }
-  //smartRefreshLayout 下拉刷新
-  implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
-  implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+       //smartRefreshLayout 下拉刷新
+      implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+      implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+      //recycleview
+      implementation 'com.android.support:recyclerview-v7:27.0.2'
+     //适配器
+     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }

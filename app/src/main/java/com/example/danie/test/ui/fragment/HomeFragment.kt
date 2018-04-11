@@ -1,26 +1,43 @@
 package com.example.danie.test.ui.fragment
-
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import com.example.danie.test.R
 import com.example.danie.test.base.BaseFragment
+import com.example.danie.test.mvp.contract.HomeContract
+import com.example.danie.test.mvp.model.bean.HomeBean
+import kotlinx.android.synthetic.main.homelayout.*
 
 /**
  * Created by Administrator on 2018/4/10 0010.
  */
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(),HomeContract.View {
+
+  override fun setHomeData(homeBean: HomeBean) {
+  }
+
+  override fun setMoreData(itemList: HomeBean.IssueListEntity.ItemListEntity) {
+  }
+
+  override fun showError(msg: String, errorCode: Int) {
+  }
+
+  override fun showLoading() {
+    mLayoutStatusView?.showLoading()
+  }
+
+  override fun dismissLoading() {
+
+  }
+
   override fun lazyLoad() {
 
   }
 
   override fun initviews() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    mLayoutStatusView=multipleStatusView
+
   }
 
   override fun layoutid(): Int {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    return R.layout.homelayout
   }
 
 

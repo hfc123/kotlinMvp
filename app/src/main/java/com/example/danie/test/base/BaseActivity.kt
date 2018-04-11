@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -13,22 +14,25 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.classic.common.MultipleStatusView
 import com.example.danie.test.R
+import com.example.danie.test.utils.TUtil
 import com.readystatesoftware.systembartint.SystemBarTintManager
+import java.lang.reflect.ParameterizedType
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<T : BasePresenter<IBaseView>> : AppCompatActivity() {
         /*
          *多种状态view的切换
          * */
-        var mLayoutStatusView: MultipleStatusView?=null;
+  var mLayoutStatusView: MultipleStatusView?=null;
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-   setContentView(layoutid())
-    initStateBar();
-    initdata()
-    initview()
-    startnet()
-    initLisener()
+        setContentView(layoutid())
+        initPresenter()
+        initStateBar();
+        initdata()
+        initview()
+        startnet()
+        initLisener()
   }
     private fun initLisener() {
         mLayoutStatusView?.setOnClickListener(mRetryClickListener)
@@ -58,9 +62,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        //presenter解绑定
+        mPresenter?.detachView()
     }
     private fun initStateBar() {
-        setColorId();
+        setColorId(R.color.color_translucent);
         if (isNeedLoadStatusBar()) {
             loadStateBar();
         }
@@ -99,13 +105,26 @@ abstract class BaseActivity : AppCompatActivity() {
      * 如果子类使用非默认的StatusBar,就重写此方法,传入布局的id
      */
 
-    protected var mColorId = R.color.color9
+    public var mColorId = R.color.color_translucent
 
-    protected fun setColorId() {
-        this.mColorId = R.color.color9//子类重写方式
+    public fun setColorId(color: Int) {
+        this.mColorId = color//子类重写方式
     }
 
-    protected fun getColorId(): Int {
+    public fun getColorId(): Int {
         return mColorId
+    }
+
+    var mPresenter: T? = null
+    //presenter 初始化
+    private fun initPresenter() {
+        if (this is IBaseView &&
+                this.javaClass.genericSuperclass is ParameterizedType &&
+                (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments.size > 0) {
+
+            mPresenter = TUtil.getT(this, 0)
+            mPresenter!!.attachView(this)
+            Log.e("初始化", this.javaClass.simpleName + " presenter 初始化成功...")
+        }
     }
 }

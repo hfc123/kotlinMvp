@@ -10,4 +10,5 @@
     <color name="color_translucent">#00000000</color>
   <!-- title 半透明背景颜色 -->
   <color name="color_title_bg">#CCFFFFFF</color>
+    <color name="color_white">#ffffff</color>
 </resources>
