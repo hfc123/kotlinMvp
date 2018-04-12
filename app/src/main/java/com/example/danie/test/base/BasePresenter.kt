@@ -1,5 +1,6 @@
 package com.example.danie.test.base
 
+import com.example.danie.test.mvp.model.HomeModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -7,6 +8,7 @@ open class BasePresenter<T:IBaseView> :IBasePresenter<T> {
 
         var mRootView:T?=null
                 private set
+
     private var compositeDisposable = CompositeDisposable()
     override fun attachView(mRootView: T) {
         this.mRootView = mRootView

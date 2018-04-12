@@ -15,7 +15,7 @@ interface HomeContract  {
         /**
          * 设置加载更多的数据
          */
-        fun setMoreData(itemList: HomeBean.IssueListEntity.ItemListEntity)
+        fun setMoreData(itemList: ArrayList<HomeBean.Issue.Item>)
 
         /**
          * 显示错误信息
@@ -32,6 +32,6 @@ interface HomeContract  {
         /**
          * 加载更多数据
          */
-        fun loadMoreData()
+        fun loadMoreData(url: String)
     }
 }

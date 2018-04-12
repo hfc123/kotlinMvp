@@ -12,6 +12,7 @@ class CostomBean (var title:String,var unselectid:Int,var selectid:Int):CustomTa
   }
 
   override fun getTabSelectedIcon(): Int {
+
     return selectid
   }
 

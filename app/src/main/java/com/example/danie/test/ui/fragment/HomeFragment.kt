@@ -11,9 +11,13 @@ import kotlinx.android.synthetic.main.homelayout.*
 class HomeFragment : BaseFragment(),HomeContract.View {
 
   override fun setHomeData(homeBean: HomeBean) {
+
+
   }
 
-  override fun setMoreData(itemList: HomeBean.IssueListEntity.ItemListEntity) {
+  override fun setMoreData(itemList:  ArrayList<HomeBean.Issue.Item>) {
+
+
   }
 
   override fun showError(msg: String, errorCode: Int) {

@@ -8,7 +8,7 @@ import retrofit2.http.Url
 
 interface Api {
     //获取首页数据
-    @GET
+    @GET("v2/feed?")
     fun gethomedata(@Query("num")num:Int):Observable<HomeBean>
     /**
      * 根据 nextPageUrl 请求数据下一页数据
