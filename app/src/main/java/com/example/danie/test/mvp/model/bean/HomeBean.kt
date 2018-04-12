@@ -7,7 +7,11 @@ data class HomeBean(val issueList: ArrayList<Issue>, val nextPageUrl: String, va
 
   data class Issue(val releaseTime:Long, val type:String, val date:Long, val total:Int, val publishTime:Long, val itemList:ArrayList<Item>, var count:Int, val nextPageUrl:String){
 
-    data class Item(val type: String, val data: Data?, val tag: String) : Serializable {
+    data class Item(val type: String, val data: Data?, val tag: String) : Serializable ,MultiItemEntity{
+      var itemtype:Int=0
+      override fun getItemType(): Int {
+        return itemtype
+      }
 
       data class Data(val dataType: String,
                       val text: String,
@@ -57,7 +61,9 @@ data class HomeBean(val issueList: ArrayList<Issue>, val nextPageUrl: String, va
                       val playlists: Any,
                       val header: Header,
                       val itemList:ArrayList<HomeBean.Issue.Item>
+
       ) : Serializable {
+
         data class Tag(val id: Int, val name: String, val actionUrl: String, val adTrack: Any) : Serializable
 
         data class Author(val icon: String, val name: String, val description: String) : Serializable

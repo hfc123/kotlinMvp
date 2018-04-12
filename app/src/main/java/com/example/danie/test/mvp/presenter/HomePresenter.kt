@@ -11,9 +11,6 @@ import com.example.danie.test.ui.fragment.HomeFragment
 
 class HomePresenter : BasePresenter() ,HomeContract.Presenter<HomeContract.View> {
 
-
-    private var bannerHomeBean: HomeBean? = null
-    var homeview: HomeContract.View? =null
     var nextPageUrl:String?=null
     private val homemodel : HomeModel by lazy {
       HomeModel()
@@ -21,7 +18,7 @@ class HomePresenter : BasePresenter() ,HomeContract.Presenter<HomeContract.View>
 
   //  mRootView  = mRootView as HomeContract.View
 
-
+  var count:Int=0
   override fun requestHomeData(num: Int) {
       // 检测是否绑定 View
       checkViewAttached()
@@ -32,6 +29,7 @@ class HomePresenter : BasePresenter() ,HomeContract.Presenter<HomeContract.View>
         banneritemlist.filter { item -> item.type=="banner2"|| item.type=="horizontalScrollCard" }
           .forEach { item->banneritemlist.remove(item) }
         bannerHomeBean = homeBean //记录第一页是当做 banner 数据
+        count=banneritemlist.size
         //根据 nextPageUrl 请求下一页数据
         homemodel.requestMoreData(homeBean.nextPageUrl)
       }).subscribe({
@@ -55,7 +53,7 @@ class HomePresenter : BasePresenter() ,HomeContract.Presenter<HomeContract.View>
 
           //赋值过滤后的数据 + banner 数据
           bannerHomeBean?.issueList!![0].itemList.addAll(newBannerItemList)
-
+          bannerHomeBean?.issueList!![0].count  =count
           setHomeData(bannerHomeBean!!)
         }
       },{ t ->

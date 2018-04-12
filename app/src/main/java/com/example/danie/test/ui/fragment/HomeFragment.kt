@@ -20,8 +20,20 @@ import kotlinx.android.synthetic.main.homelayout.*
 class HomeFragment : BaseFragment<HomePresenter>(),HomeContract.View {
 
   override fun setHomeData(homeBean: HomeBean) {
-
-
+    homeBeanList.clear()
+  //  homeBeanList.addAll()
+    for ((index,value) in homeBean.issueList[0].itemList.withIndex()){
+      if (index>homeBean.issueList[0].count){
+        value.itemtype=0;
+      }else{
+        if (value.type == "textHeader"){
+          value.itemtype=1;
+        }else{
+          value.itemtype=2;
+        }
+      }
+    }
+    homeBeanList.addAll(homeBean.issueList[0].itemList)
   }
 
   override fun setMoreData(itemList:  ArrayList<HomeBean.Issue.Item>) {
@@ -41,16 +53,21 @@ class HomeFragment : BaseFragment<HomePresenter>(),HomeContract.View {
   }
 
   override fun lazyLoad() {
-
+    mPresenter?.requestHomeData(0)
   }
   private val linearLayoutManager:LinearLayoutManager by lazy {
     LinearLayoutManager(activity,LinearLayout.VERTICAL,false)
+  }
+
+  val homeBeanList by lazy{
+    ArrayList<MultiItemEntity>()
+
   }
   override fun initviews() {
     mLayoutStatusView=multipleStatusView
    // mPresenter?.attachView(this)
     homerecycler.layoutManager=linearLayoutManager
-    homerecycler.adapter=HomeAdapter(ArrayList<MultiItemEntity>())
+    homerecycler.adapter=HomeAdapter(homeBeanList)
     homerecycler.itemAnimator=DefaultItemAnimator()
   }
 
