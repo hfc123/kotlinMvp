@@ -15,7 +15,7 @@ import com.example.danie.test.ui.fragment.MineFragment
 import com.flyco.tablayout.listener.CustomTabEntity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<BasePresenter<IBaseView>>() {
+class MainActivity : BaseActivity<BasePresenter>() {
     private val mTitles = arrayOf("每日精选", "发现", "热门", "我的")
     private  val unSeclectMaps= intArrayOf(R.mipmap.ic_home_normal,R.mipmap.ic_discovery_normal,R.mipmap.ic_hot_normal,R.mipmap.ic_mine_normal)
     private  val SeclectMaps= intArrayOf(R.mipmap.ic_home_selected,R.mipmap.ic_discovery_selected,R.mipmap.ic_hot_selected,R.mipmap.ic_mine_selected)

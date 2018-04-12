@@ -1,6 +1,5 @@
 package com.example.danie.test.mvp.contract
 
-import com.example.danie.test.base.IBasePresenter
 import com.example.danie.test.base.IBaseView
 import com.example.danie.test.mvp.model.bean.HomeBean
 
@@ -23,12 +22,12 @@ interface HomeContract  {
         fun showError(msg: String,errorCode:Int)
 
     }
-    interface Presenter:IBasePresenter<View>{
+    interface Presenter<View>{
         /**
          * 获取首页精选数据
          */
         fun requestHomeData(num: Int)
-
+        //fun initdata()
         /**
          * 加载更多数据
          */

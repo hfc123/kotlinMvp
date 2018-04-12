@@ -3,18 +3,26 @@ package com.example.danie.test.mvp.presenter
 import android.util.Log
 import android.widget.Toast
 import com.example.danie.test.base.BasePresenter
+import com.example.danie.test.base.IBaseView
 import com.example.danie.test.mvp.contract.HomeContract
 import com.example.danie.test.mvp.model.HomeModel
 import com.example.danie.test.mvp.model.bean.HomeBean
+import com.example.danie.test.ui.fragment.HomeFragment
 
-class HomePresenter :BasePresenter<HomeContract.View>(),HomeContract.Presenter {
-  private var bannerHomeBean: HomeBean? = null
+class HomePresenter : BasePresenter() ,HomeContract.Presenter<HomeContract.View> {
+
+
+    private var bannerHomeBean: HomeBean? = null
     var homeview: HomeContract.View? =null
     var nextPageUrl:String?=null
     private val homemodel : HomeModel by lazy {
       HomeModel()
     }
-    override fun requestHomeData(num: Int) {
+
+  //  mRootView  = mRootView as HomeContract.View
+
+
+  override fun requestHomeData(num: Int) {
       // 检测是否绑定 View
       checkViewAttached()
       var bannerHomeBean:HomeBean?=null
@@ -29,7 +37,9 @@ class HomePresenter :BasePresenter<HomeContract.View>(),HomeContract.Presenter {
       }).subscribe({
        homebeean->
         nextPageUrl= homebeean.nextPageUrl
-        mRootView?.apply {
+
+
+        (mRootView as HomeContract.View)?.apply {
           dismissLoading()
           //过滤掉 Banner2(包含广告,等不需要的 Type), 具体查看接口分析
           val newBannerItemList = homebeean.issueList[0].itemList
@@ -60,14 +70,14 @@ class HomePresenter :BasePresenter<HomeContract.View>(),HomeContract.Presenter {
       mRootView?.showLoading()
       homemodel.requestMoreData(nextPageUrl!!).subscribe({
         homebean->
-        mRootView?.apply{
+        (mRootView as HomeContract.View)?.apply{
           nextPageUrl=homebean.nextPageUrl
           var itemlist=homebean.issueList[0].itemList
           itemlist.filter { item -> item.type=="banner2"||item.type=="horizontalScrollCard" }.forEach {
            item->
             itemlist.remove(item)
           }
-          mRootView?.setMoreData(itemlist)
+          setMoreData(itemlist)
         }
 
       },{

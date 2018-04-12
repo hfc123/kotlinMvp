@@ -4,13 +4,14 @@ import com.example.danie.test.mvp.model.HomeModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-open class BasePresenter<T:IBaseView> :IBasePresenter<T> {
+open class BasePresenter :IBasePresenter<IBaseView> {
 
-        var mRootView:T?=null
+
+    var mRootView:IBaseView?=null
                 private set
 
     private var compositeDisposable = CompositeDisposable()
-    override fun attachView(mRootView: T) {
+    override fun attachView(mRootView: IBaseView) {
         this.mRootView = mRootView
     }
 

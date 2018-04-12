@@ -18,7 +18,7 @@ import com.example.danie.test.utils.TUtil
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseActivity<T : BasePresenter<IBaseView>> : AppCompatActivity() {
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
         /*
          *多种状态view的切换
          * */

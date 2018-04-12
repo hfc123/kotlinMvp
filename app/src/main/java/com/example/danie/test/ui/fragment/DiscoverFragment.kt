@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.danie.test.R
 import com.example.danie.test.base.BaseFragment
+import com.example.danie.test.base.BasePresenter
 
 /**
  * Created by Administrator on 2018/4/10 0010.
  */
-class DiscoverFragment :BaseFragment() {
+class DiscoverFragment :BaseFragment<BasePresenter>() {
   override fun lazyLoad() {
 
   }
