@@ -17,7 +17,7 @@
     <com.scwang.smartrefresh.header.MaterialHeader
     android:layout_width="match_parent"
     android:layout_height="wrap_content"></com.scwang.smartrefresh.header.MaterialHeader>
-     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -79,4 +79,5 @@
         </android.support.v7.widget.Toolbar>
 
     </FrameLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </RelativeLayout>

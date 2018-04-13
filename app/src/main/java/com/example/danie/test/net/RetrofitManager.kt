@@ -12,6 +12,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
+import android.text.TextUtils
+import android.util.Log
+
 
 object  RetrofitManager {
 
@@ -24,12 +27,16 @@ object  RetrofitManager {
     private var token:String by Preference("token","")
 
     private fun getretrofit(): Retrofit? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
         if (retrofit==null){
            synchronized(Retrofit::class.java){
                //设置拦截器
-               val httpLoggingInterceptor=HttpLoggingInterceptor()
+               val httpLoggingInterceptor=HttpLoggingInterceptor(){
+                   message ->
+                   if (TextUtils.isEmpty(message)){return@HttpLoggingInterceptor}
+
+                       Log.i("收到响应:"," $message")
+               }
                httpLoggingInterceptor.level=HttpLoggingInterceptor.Level.BODY
                //设置缓存
                val cacheFile=File(App.context.cacheDir,"cache")
@@ -48,6 +55,7 @@ object  RetrofitManager {
                        .baseUrl(UriConstant.BASE_URL)
                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//rx
                        .addConverterFactory(GsonConverterFactory.create())
+                       .client(okHttpClient)
                        .build()
            }
 

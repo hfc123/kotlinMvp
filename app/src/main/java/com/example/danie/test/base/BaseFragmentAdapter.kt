@@ -6,6 +6,13 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
  class BaseFragmentAdapter: FragmentPagerAdapter {
+     override fun getItem(position: Int): Fragment {
+         return fragmentList?.get(position)!!
+     }
+
+     override fun getCount(): Int {
+         return mTitles?.size!!
+     }
 
      private var fragmentList: List<Fragment>? = ArrayList()
      private var mTitles: List<String>? = null
@@ -34,11 +41,5 @@ import android.support.v4.app.FragmentPagerAdapter
          this.fragmentList = fragments
          notifyDataSetChanged()
      }
-     override fun getItem(position: Int): Fragment {
-         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-     }
 
-     override fun getCount(): Int {
-         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-     }
  }

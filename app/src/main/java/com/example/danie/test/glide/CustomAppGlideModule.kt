@@ -28,7 +28,6 @@ class CustomAppGlideModule : AppGlideModule() {
 
         //重新设置内存限制
         builder!!.setMemoryCache(LruResourceCache(10 * 1024 * 1024))
-
     }
 
 

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -17,15 +17,10 @@ android {
          renderscriptTargetApi 19
         renderscriptSupportModeEnabled true    // Enable RS support
     /*  javaCompileOptions {
-        annotationProcessororOptions{
-          includeCompileClasspath true
-        }
-      }*/
-      javaCompileOptions {
         annotationProcessorOptions {
           includeCompileClasspath = true
         }
-      }
+      }*/
     }
     buildTypes {
         release {
@@ -68,17 +63,20 @@ dependencies {
       implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
       implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
       //recycleview
-      implementation 'com.android.support:recyclerview-v7:27.0.2'
+      implementation 'com.android.support:recyclerview-v7:27.1.0'
      //适配器
      implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 //Banner
-  implementation 'cn.bingoogolapple:bga-banner:2.1.8@aar'
+
+    implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+
 
   //GlideOkHttp
 
   implementation "com.github.bumptech.glide:okhttp3-integration:4.0.0"
   implementation  "com.github.bumptech.glide:glide:4.0.0"
-  implementation "com.github.bumptech.glide:compiler:4.0.0"
+    kapt  "com.github.bumptech.glide:compiler:4.0.0"
+   //implementation 'com.android.support:support-annotations:27.1.0'
 }
 /*
 * Error:FAILURE: Build failed with an exception.

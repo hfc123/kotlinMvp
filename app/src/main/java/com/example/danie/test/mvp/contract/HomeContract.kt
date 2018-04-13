@@ -31,6 +31,6 @@ interface HomeContract  {
         /**
          * 加载更多数据
          */
-        fun loadMoreData(url: String)
+        fun loadMoreData()
     }
 }

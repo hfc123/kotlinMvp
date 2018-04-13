@@ -23,7 +23,7 @@ class HomePresenter : BasePresenter() ,HomeContract.Presenter<HomeContract.View>
       // 检测是否绑定 View
       checkViewAttached()
       var bannerHomeBean:HomeBean?=null
-      homemodel.requestHomeData(num).flatMap({
+      val disposable= homemodel.requestHomeData(num).flatMap({
         homeBean ->
         val banneritemlist=homeBean.issueList[0].itemList
         banneritemlist.filter { item -> item.type=="banner2"|| item.type=="horizontalScrollCard" }
@@ -56,30 +56,34 @@ class HomePresenter : BasePresenter() ,HomeContract.Presenter<HomeContract.View>
           bannerHomeBean?.issueList!![0].count  =count
           setHomeData(bannerHomeBean!!)
         }
-      },{ t ->
+      },{ t ->//errr
         mRootView?.apply {
           dismissLoading()
           Log.e("error","error",t)
         }})
+      addSubscription(disposable)
     }
 
-    override fun loadMoreData(url: String) {
+    override fun loadMoreData() {
       checkViewAttached()
-      mRootView?.showLoading()
+     /* mRootView?.showLoading()*/
       homemodel.requestMoreData(nextPageUrl!!).subscribe({
         homebean->
         (mRootView as HomeContract.View)?.apply{
           nextPageUrl=homebean.nextPageUrl
+            dismissLoading()
           var itemlist=homebean.issueList[0].itemList
           itemlist.filter { item -> item.type=="banner2"||item.type=="horizontalScrollCard" }.forEach {
            item->
             itemlist.remove(item)
           }
+            val itemlistcount=itemlist.size
+            Log.e("succsess","succsess:::$itemlistcount")
           setMoreData(itemlist)
         }
 
       },{
-        t->
+        t->//error
         mRootView?.apply {
           mRootView?.dismissLoading()
           Log.e("error","error",t)

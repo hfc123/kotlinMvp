@@ -9,6 +9,7 @@ data class HomeBean(val issueList: ArrayList<Issue>, val nextPageUrl: String, va
 
     data class Item(val type: String, val data: Data?, val tag: String) : Serializable ,MultiItemEntity{
       var itemtype:Int=0
+      var bannerlist:ArrayList<Item> = ArrayList<Item>()
       override fun getItemType(): Int {
         return itemtype
       }
