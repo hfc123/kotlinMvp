@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.danie.test.R
 import com.example.danie.test.base.BaseFragment
@@ -14,6 +15,7 @@ import com.example.danie.test.mvp.contract.HotContract
 import com.example.danie.test.mvp.model.bean.RankBean
 import com.example.danie.test.mvp.presenter.HotPresenter
 import com.example.danie.test.ui.adapter.DiscoveryAdapter
+import kotlinx.android.synthetic.main.activity_search_layout.*
 
 import kotlinx.android.synthetic.main.fragment_hot.*
 
@@ -44,9 +46,10 @@ class HotFragment : BaseFragment<HotPresenter>() ,HotContract.View{
       titles.add(it.name!!)
       fragments.add(fragment)
     }
-
-    mViewPager.adapter= DiscoveryAdapter(fragmentManager,fragments,titles)
+    val adapter=DiscoveryAdapter(fragmentManager,fragments,titles)
+    mViewPager.adapter= adapter
     mTabLayout.setupWithViewPager(mViewPager)
+    //val imgview= adapter.getViewByPosition(search_recycleview,position,R.id.iv_image) as ImageView
 
   }
 

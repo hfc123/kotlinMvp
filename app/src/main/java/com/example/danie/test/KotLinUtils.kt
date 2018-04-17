@@ -1,13 +1,20 @@
 package com.example.danie.test
 
+import android.app.Activity
+import android.content.Intent
 import android.content.res.Resources
 import android.widget.LinearLayout
-import android.opengl.ETC1.getWidth
 import android.widget.TextView
-import java.lang.reflect.AccessibleObject.setAccessible
 import android.support.design.widget.TabLayout
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.FragmentActivity
+import android.support.v4.view.ViewCompat
 import android.util.TypedValue
-import java.lang.reflect.AccessibleObject.setAccessible
+import android.view.View
+import com.example.danie.test.mvp.model.bean.HomeBean
+import com.example.danie.test.ui.activity.SearchActivity
+import com.example.danie.test.ui.activity.VideoActivity
 import java.lang.reflect.Field
 
 //时间转换
@@ -108,3 +115,18 @@ fun setIndicator(tabs: TabLayout, leftDip: Int, rightDip: Int) {
     }
 }
 
+//跳转activity
+ fun goVideoActivity(activity: Activity, view: View, issueItem: HomeBean.Issue.Item){
+
+  val intent= Intent(activity, VideoActivity::class.java)
+  intent.putExtra("video",issueItem)
+  intent.putExtra("translate",true)
+  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+    ViewCompat.setTransitionName(view,"videoImage")
+    val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, "videoImage")
+    ActivityCompat.startActivity(activity, intent, activityOptions.toBundle())
+  }else{
+    activity.startActivity(intent)
+    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out)
+  }
+}

@@ -1,5 +1,6 @@
 package com.example.danie.test.ui.adapter
 
+import android.app.Activity
 import android.widget.ImageView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -8,6 +9,7 @@ import com.example.danie.test.mvp.model.bean.HomeBean
 import com.hazz.kotlinmvp.glide.GlideApp
 import com.example.danie.test.R
 import com.example.danie.test.changedate
+import com.example.danie.test.goVideoActivity
 
 class FollowItemAdapter1 :BaseQuickAdapter<HomeBean.Issue.Item,BaseViewHolder> {
     constructor(layoutResId: Int, data: MutableList<HomeBean.Issue.Item>?) : super(layoutResId, data)
@@ -20,12 +22,15 @@ class FollowItemAdapter1 :BaseQuickAdapter<HomeBean.Issue.Item,BaseViewHolder> {
         item?.data?.tags?.forEach {
             tagname+=it?.name+"/"
         }
-        helper?.setText(R.id.tv_tag,tagname+changedate(item?.data?.duration))
+       helper?.setText(R.id.tv_tag,tagname+changedate(item?.data?.duration))
        var imafeview= helper?.getView<ImageView>(R.id.iv_cover_feed)
         GlideApp.with(mContext)
                 .load(item?.data?.cover?.feed!!)
                 .placeholder(R.drawable.placeholder_banner)
                 .transition(DrawableTransitionOptions().crossFade())
                 .into(imafeview)
+      helper?.itemView?.setOnClickListener({
+        goVideoActivity(mContext as Activity,imafeview!!,item)
+      })
     }
 }

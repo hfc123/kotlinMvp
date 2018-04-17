@@ -1,18 +1,21 @@
 package com.example.danie.test.ui.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.danie.test.R
 import com.example.danie.test.base.BaseFragment
+import com.example.danie.test.goVideoActivity
 import com.example.danie.test.mvp.contract.RankContract
 import com.example.danie.test.mvp.model.bean.HomeBean
 import com.example.danie.test.mvp.presenter.RankPresenter
 import com.example.danie.test.ui.adapter.RankAdapter
+import kotlinx.android.synthetic.main.activity_search_layout.*
 import kotlinx.android.synthetic.main.fragment_rank.*
-import kotlinx.android.synthetic.main.homelayout.*
 
 /**
  * Created by Administrator on 2018/4/16 0016.
@@ -62,6 +65,8 @@ class RankFragment : BaseFragment<RankPresenter>(), RankContract.View {
     mRecyclerView.adapter=adapter
 
     adapter.setOnItemClickListener { adapter, view, position ->
+      val imgview= adapter.getViewByPosition(search_recycleview,position,R.id.iv_image) as ImageView
+      goVideoActivity(activity as Activity,imgview,itemList.get(position))
     }
   }
 

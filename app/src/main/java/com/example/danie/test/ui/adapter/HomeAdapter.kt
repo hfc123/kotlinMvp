@@ -1,5 +1,6 @@
 package com.example.danie.test.ui.adapter
 
+import android.app.Activity
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.example.danie.test.R
 import com.example.danie.test.changedate
+import com.example.danie.test.goVideoActivity
 import com.example.danie.test.mvp.model.bean.HomeBean
 import com.hazz.kotlinmvp.glide.GlideApp
 
@@ -44,7 +46,7 @@ class HomeAdapter : BaseMultiItemQuickAdapter<MultiItemEntity,BaseViewHolder> {
   val bannerFeedList = ArrayList<String>()
   val bannerTitleList = ArrayList<String>()
   override fun convert(helper: BaseViewHolder?, item: MultiItemEntity?) {
-      var a=item?.itemType
+
         when(item?.itemType){
             ITEM_TYPE_BANNER ->{
             //  if (index==0) {
@@ -55,12 +57,12 @@ class HomeAdapter : BaseMultiItemQuickAdapter<MultiItemEntity,BaseViewHolder> {
                     bannerTitleList.add(item1?.data?.title?:"")
                 }
 
-
-
                 helper?.getView<BGABanner>(R.id.banner).run {
+                  this!!.setDelegate({ _, imageView, _, i ->
+                    goVideoActivity(mContext as Activity,imageView,(item as HomeBean.Issue.Item)?.bannerlist.get(i))
+                  })
                   this!!.setAutoPlayAble(bannersize> 1)
-
-                    this!!.setData(bannerFeedList,bannerTitleList)
+                  this!!.setData(bannerFeedList,bannerTitleList)
                   this!!.setAdapter(object :BGABanner.Adapter<ImageView, String>{
                     override fun fillBannerItem(p0: BGABanner?, p1: ImageView?, p2: String?, p3: Int) {
                      GlideApp.with(mContext)
@@ -75,6 +77,9 @@ class HomeAdapter : BaseMultiItemQuickAdapter<MultiItemEntity,BaseViewHolder> {
                 helper?.getView<TextView>(R.id.tvHeader)?.setText((item as HomeBean.Issue.Item)?.data?.text?:"")
             }
             ITEM_TYPE_CONTENT->{
+              helper?.itemView?.setOnClickListener({
+                goVideoActivity(mContext as Activity,helper?.getView<ImageView>(R.id.iv_cover_feed),item as HomeBean.Issue.Item)
+              })
                 var itemEntity=   item as HomeBean.Issue.Item
                 //imageview content图片
                 var name:String="#"
