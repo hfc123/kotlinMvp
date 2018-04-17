@@ -1,8 +1,13 @@
 package com.example.danie.test.ui.fragment
+import android.app.Activity
+import android.content.Intent
+import android.os.Build
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.entity.MultiItemEntity
@@ -13,6 +18,7 @@ import com.example.danie.test.base.IBaseView
 import com.example.danie.test.mvp.contract.HomeContract
 import com.example.danie.test.mvp.model.bean.HomeBean
 import com.example.danie.test.mvp.presenter.HomePresenter
+import com.example.danie.test.ui.activity.SearchActivity
 import com.example.danie.test.ui.adapter.HomeAdapter
 import com.scwang.smartrefresh.header.MaterialHeader
 import kotlinx.android.synthetic.main.homelayout.*
@@ -83,9 +89,24 @@ class HomeFragment : BaseFragment<HomePresenter>(),HomeContract.View {
     ArrayList<MultiItemEntity>()
 
   }
+  private fun openSearchActivity() {
+ /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity as Activity, serch, serch.transitionName)
+      startActivity(Intent(activity, SearchActivity::class.java), options.toBundle())
+    } else {
+      startActivity(Intent(activity, SearchActivity::class.java))
+    }*/
+    startActivity(Intent(activity, SearchActivity::class.java))
+  }
   private var mMaterialHeader: MaterialHeader? = null
   val homeAdapter by lazy { HomeAdapter(homeBeanList) }
   override fun initviews() {
+    serch.setOnClickListener(object :View.OnClickListener{
+      override fun onClick(v: View?) {
+        openSearchActivity()
+      }
+
+    })
     mLayoutStatusView=multipleStatusView
    // mPresenter?.attachView(this)
     homerecycler.layoutManager=linearLayoutManager

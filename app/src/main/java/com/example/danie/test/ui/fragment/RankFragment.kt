@@ -30,8 +30,6 @@ class RankFragment : BaseFragment<RankPresenter>(), RankContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     url=arguments?.getString("url")
-    Log.e("error",url)
-
   }
   override fun setrankdata(issue: HomeBean.Issue) {
     issue.itemList.forEach {

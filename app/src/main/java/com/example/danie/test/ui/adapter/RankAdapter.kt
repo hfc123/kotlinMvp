@@ -16,7 +16,6 @@ import com.hazz.kotlinmvp.glide.GlideApp
 class RankAdapter : BaseQuickAdapter<HomeBean.Issue.Item,BaseViewHolder> {
   override fun convert(helper: BaseViewHolder?, item: HomeBean.Issue.Item?) {
     helper?.setText(R.id.tv_title,item?.data?.title)
-    Log.e("sssssssss","1111")
     var tags:String ="#"
     item?.data?.tags?.forEach {
       tags+=it.name

@@ -45,7 +45,6 @@ class HomeAdapter : BaseMultiItemQuickAdapter<MultiItemEntity,BaseViewHolder> {
   val bannerTitleList = ArrayList<String>()
   override fun convert(helper: BaseViewHolder?, item: MultiItemEntity?) {
       var a=item?.itemType
-            Log.e("itemType","$a 1")
         when(item?.itemType){
             ITEM_TYPE_BANNER ->{
             //  if (index==0) {
@@ -56,7 +55,6 @@ class HomeAdapter : BaseMultiItemQuickAdapter<MultiItemEntity,BaseViewHolder> {
                     bannerTitleList.add(item1?.data?.title?:"")
                 }
 
-                Log.e("url1",(item as HomeBean.Issue.Item)?.data?.cover?.feed?:"")
 
 
                 helper?.getView<BGABanner>(R.id.banner).run {
@@ -65,7 +63,6 @@ class HomeAdapter : BaseMultiItemQuickAdapter<MultiItemEntity,BaseViewHolder> {
                     this!!.setData(bannerFeedList,bannerTitleList)
                   this!!.setAdapter(object :BGABanner.Adapter<ImageView, String>{
                     override fun fillBannerItem(p0: BGABanner?, p1: ImageView?, p2: String?, p3: Int) {
-                        Log.e("url2",p2)
                      GlideApp.with(mContext)
                         .load(p2)
                         .transition(DrawableTransitionOptions().crossFade())

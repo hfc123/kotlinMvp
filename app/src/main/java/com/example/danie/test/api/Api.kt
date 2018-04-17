@@ -44,5 +44,14 @@ interface Api {
   * 根据url获取bean类
   * */
       @GET
-      fun  getRankdata(@Url url: String):Observable<HomeBean.Issue>
+      fun  getRankdata(@Url url: String):Observable<HomeBean.Issue>/*
+  * 根据url获取bean类
+  * */
+      @GET("v3/queries/hot")
+      fun  getHotWords():Observable<ArrayList<String>>
+    /**
+     * 获取搜索信息
+     */
+    @GET("v1/search?&num=10&start=10")
+    fun getSearchData(@Query("query") query :String) : Observable<HomeBean.Issue>
 }
