@@ -6,17 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    app:errorView="@layout/errorlayout"
-    app:emptyView="@layout/nodatalayout"
-    app:noNetworkView="@layout/nonetworklayout"
-    app:loadingView="@layout/loadingview">
+  app:errorView="@layout/errorlayout"
+  app:emptyView="@layout/nodatalayout"
+  app:noNetworkView="@layout/nonetworklayout"
+  app:loadingView="@layout/loadingview">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="0dp"
-        tools:listitem="@layout/item_category" />
+        android:paddingBottom="@dimen/padding_tab_layout_bottom"
+        tools:listitem="@layout/item_category_detail">
 
+    </android.support.v7.widget.RecyclerView>
 </com.classic.common.MultipleStatusView>

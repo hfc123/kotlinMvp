@@ -2,6 +2,7 @@ package com.example.danie.test.api
 
 import com.example.danie.test.mvp.model.bean.FenLeiBean
 import com.example.danie.test.mvp.model.bean.HomeBean
+import com.example.danie.test.mvp.model.bean.RankBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -28,4 +29,20 @@ interface Api {
     */
     @GET("v4/categories")
     fun getFenLeiData():Observable<ArrayList<FenLeiBean>>
+    /**
+     * 热门搜索词
+     */
+    @GET("v3/queries/hot")
+    fun getHotWord():Observable<ArrayList<String>>
+
+  /**
+   * 获取全部排行榜的Info（包括，title 和 Url）
+   */
+     @GET("v4/rankList")
+      fun getRankList():Observable<RankBean>
+  /*
+  * 根据url获取bean类
+  * */
+      @GET
+      fun  getRankdata(@Url url: String):Observable<HomeBean.Issue>
 }
