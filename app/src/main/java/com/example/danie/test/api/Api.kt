@@ -60,4 +60,9 @@ interface Api {
    */
   @GET("v4/video/related?")
   fun getRelatedData(@Query("id") id: Long): Observable<HomeBean.Issue>
+    /**
+     * 获取分类详情List
+     */
+    @GET("v4/categories/videoList?")
+    fun getCategoryDetailList(@Query("id") id: Long): Observable<HomeBean.Issue>
 }

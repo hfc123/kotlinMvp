@@ -1,6 +1,8 @@
 package com.example.danie.test.mvp.model.bean
 
-class FenLeiBean {
+import java.io.Serializable
+
+class FenLeiBean :Serializable {
 
     /**
      * bgColor :

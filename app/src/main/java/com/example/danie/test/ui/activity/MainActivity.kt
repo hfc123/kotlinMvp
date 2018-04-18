@@ -39,7 +39,7 @@ class MainActivity : BaseActivity<BasePresenter>() ,IBaseView{
     }
 
     override fun initview() {
-        mColorId=R.color.color_translucent
+      mColorId=R.color.color_translucent
       mHomeFragment= HomeFragment()
       mDiscoveryFragment= DiscoverFragment()
       mHotFragment= HotFragment()

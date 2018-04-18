@@ -24,11 +24,5 @@ class MineFragment :BaseFragment<BasePresenter>() {
     return R.layout.minelayout
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-    val textview: TextView = TextView(activity)
-    textview.setText("4")
-
-    return textview
-  }
 }

@@ -1,5 +1,6 @@
 package com.example.danie.test.ui.fragment
 
+import android.content.Intent
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import android.widget.GridLayout
@@ -10,6 +11,7 @@ import com.example.danie.test.base.BasePresenter
 import com.example.danie.test.mvp.contract.FenLeiContract
 import com.example.danie.test.mvp.model.bean.FenLeiBean
 import com.example.danie.test.mvp.presenter.FenLeiPresenter
+import com.example.danie.test.ui.activity.Scrolling_Detail_FenLei_Activity
 import com.example.danie.test.ui.adapter.FenLeiAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
 
@@ -46,8 +48,11 @@ class ClassIfication :BaseFragment<FenLeiPresenter>(),FenLeiContract.View{
         mRecyclerView.adapter=adapter
         adapter.setOnItemClickListener(object :BaseQuickAdapter.OnItemClickListener{
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-                //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+                val intent=Intent(activity,Scrolling_Detail_FenLei_Activity::class.java)
+                intent.putExtra("FENLEINAME",list.get(position))
+                       // FENLEINAME
+                startActivity(intent)
+                }
 
         })
     }

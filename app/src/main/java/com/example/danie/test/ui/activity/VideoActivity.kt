@@ -8,8 +8,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.danie.test.base.BaseActivity
 import com.example.danie.test.R
 import com.example.danie.test.mvp.contract.VideoDetailContract
