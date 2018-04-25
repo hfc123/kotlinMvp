@@ -65,7 +65,7 @@ class RankFragment : BaseFragment<RankPresenter>(), RankContract.View {
     mRecyclerView.adapter=adapter
 
     adapter.setOnItemClickListener { adapter, view, position ->
-      val imgview= adapter.getViewByPosition(search_recycleview,position,R.id.iv_image) as ImageView
+      val imgview= adapter.getViewByPosition(mRecyclerView,position,R.id.iv_image) as ImageView
       goVideoActivity(activity as Activity,imgview,itemList.get(position))
     }
   }
